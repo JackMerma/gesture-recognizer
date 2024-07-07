@@ -22,5 +22,6 @@ def load_parser():
 
     # Adding IA arguments
     parser.add_argument('-t', '--train', action='store_true', help="train model with loaded data.")
+    parser.add_argument('--name', type=str, required=False, help="saved model name.")
 
     return parser.parse_args()
