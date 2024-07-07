@@ -15,7 +15,7 @@ def train(model_name):
             )
 
     # Get a compiled model
-    model = get_model(IMAGE_WIDTH, IMAGE_HEIGTH, CATEGORIES)
+    model = get_model((IMAGE_WIDTH, IMAGE_HEIGTH, 1), CATEGORIES)
 
     # Fitting the model using training data
     model.fit(x_train, y_train, epochs=EPOCHS)

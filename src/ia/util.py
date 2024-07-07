@@ -6,7 +6,7 @@ import numpy as np
 
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
 
 def load_data(path, categories, img_width, img_height):
 
@@ -30,11 +30,11 @@ def load_data(path, categories, img_width, img_height):
     return images, labels
 
 
-def get_model(img_width, img_height, categories):
+def get_model(shape, categories):
 
     model = Sequential([
         Conv2D(
-            32, (2, 2), activation="relu", input_shape=(img_width, img_height, 1)
+            32, (2, 2), activation="relu", input_shape=shape
             ),
         MaxPooling2D(pool_size=(2, 2)),
         Conv2D(64, (2, 2), activation="relu"),
@@ -46,6 +46,7 @@ def get_model(img_width, img_height, categories):
         Dropout(0.2),
         Dense(len(categories), activation="sigmoid")
         ])
+
 
     model.compile(
             optimizer="adam",
@@ -71,4 +72,5 @@ def predict(frame, model):
     
     class_prediction, acc = get_prediction(prediction[0])
     print(class_prediction)
+    print(prediction)
 
