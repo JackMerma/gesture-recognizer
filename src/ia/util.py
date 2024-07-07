@@ -15,7 +15,6 @@ def load_data(path, categories, img_width, img_height):
     
     for category in range(len(categories)):
         category_dir = os.path.join(path, categories[category])
-        print("DEBUG: ", category_dir)
 
         # Processing files
         for file in os.listdir(category_dir):
@@ -26,3 +25,29 @@ def load_data(path, categories, img_width, img_height):
             labels.append(category)
 
     return images, labels
+
+
+def get_model(img_width, img_height, categories):
+
+    model = Sequential([
+        Conv2D(
+            32, (2, 2), activation="relu", input_shape=(img_width, img_height, 1)
+            ),
+        MaxPooling2D(pool_size=(2, 2)),
+        Conv2D(64, (2, 2), activation="relu"),
+        MaxPooling2D(pool_size=(3, 3)),
+        Conv2D(128, (2, 2), activation="relu"),
+        MaxPooling2D(pool_size=(3, 3)),
+        Flatten(),
+        Dense(512, activation="relu"),
+        Dropout(0.2),
+        Dense(len(categories), activation="sigmoid")
+        ])
+
+    model.compile(
+            optimizer="adam",
+            loss="categorical_crossentropy",
+            metrics=["accuracy"]
+            )
+
+    return model
