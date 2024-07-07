@@ -1,4 +1,5 @@
 from src.capture.capture_data import *
+from src.ia.train_model import *
 from config import *
 
 
@@ -12,6 +13,8 @@ def main():
             capture(0)
         elif args.close:
             capture(1)
+    elif args.train:
+        train()
 
 
 
