@@ -14,7 +14,9 @@ def main():
         elif args.close:
             capture(1)
     elif args.train:
-        train()
+        train(args.name)
+    elif args.play:
+        play(args.play)
 
 
 
