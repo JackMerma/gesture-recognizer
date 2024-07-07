@@ -1,11 +1,13 @@
 import argparse
 
+CAMERA_INDEX = 0
 DATA_FOLDER = "data"
 CATEGORIES = ["open", "close"]
 CLASS_NAME = ["OPEN", "CLOSE"]
 EXTENSION = "jpg"
 MODEL_FOLDER = "models"
-MODEL_NAME = "model.keras"
+MODEL_NAME = "model"
+MODEL_EXTENSION = "keras"
 IMAGE_WIDTH = 50
 IMAGE_HEIGTH = 50
 TEST_SIZE = 0.4
@@ -23,5 +25,6 @@ def load_parser():
     # Adding IA arguments
     parser.add_argument('-t', '--train', action='store_true', help="train model with loaded data.")
     parser.add_argument('-n', '--name', type=str, required=False, help="saved model name.")
+    parser.add_argument('-p', '--play', type=str, required=False, help="play real time app predictor.")
 
     return parser.parse_args()
