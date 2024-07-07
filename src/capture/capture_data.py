@@ -36,7 +36,7 @@ def check(path):
 def capture(data_class):
 
     # Getting path
-    path = PATH_CLASS[data_class]
+    path = os.path.join(DATA_FOLDER, CATEGORIES[data_class])
 
     # Assert that path exist
     check(path)
