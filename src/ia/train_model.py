@@ -24,5 +24,5 @@ def train(model_name):
     model.evaluate(x_test, y_test, verbose=2)
 
     # Saving model
-    model_file_path = os.path.join(MODEL_FOLDER, MODEL_NAME if model_name == None else f"{model_name}.keras")
+    model_file_path = os.path.join(MODEL_FOLDER, f"{MODEL_NAME}.{MODEL_EXTENSION}" if model_name == None else f"{model_name}.{MODEL_EXTENSION}")
     model.save(model_file_path)
