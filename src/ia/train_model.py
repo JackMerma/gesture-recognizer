@@ -2,7 +2,7 @@ from src.ia.util import *
 from config import *
 
 
-def train():
+def train(model_name):
 
     # Loading data
     images, labels = load_data(DATA_FOLDER, CATEGORIES, IMAGE_WIDTH, IMAGE_HEIGTH)
@@ -24,5 +24,5 @@ def train():
     model.evaluate(x_test, y_test, verbose=2)
 
     # Saving model
-    model_file_path = os.path.join(MODEL_FOLDER, MODEL_NAME)
+    model_file_path = os.path.join(MODEL_FOLDER, MODEL_NAME if model_name == None else f"{model_name}.keras")
     model.save(model_file_path)
