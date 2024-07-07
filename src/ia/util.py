@@ -56,9 +56,19 @@ def get_model(img_width, img_height, categories):
     return model
 
 
+def get_prediction(prediction):
+
+    if prediction[0] > prediction[1]:
+        return 0, prediction[0]
+
+    return 1, prediction[1]
+
+
 def predict(frame, model):
 
-    image = np.array(frame)
+    image = np.expand_dims(frame, axis=(0, -1))
     prediction = model.predict(image)
-    print(prediction)
+    
+    class_prediction, acc = get_prediction(prediction[0])
+    print(class_prediction)
 
