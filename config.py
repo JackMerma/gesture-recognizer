@@ -5,8 +5,11 @@ CATEGORIES = ["open", "close"]
 CLASS_NAME = ["OPEN", "CLOSE"]
 EXTENSION = "jpg"
 MODEL_FOLDER = "models"
+MODEL_NAME = "model.keras"
 IMAGE_WIDTH = 50
 IMAGE_HEIGTH = 50
+TEST_SIZE = 0.4
+EPOCHS = 10
 
 
 def load_parser():
