@@ -16,6 +16,9 @@ def load_data(path, categories, img_width, img_height):
     for category in range(len(categories)):
         category_dir = os.path.join(path, categories[category])
 
+        if not os.path.exists(category_dir):
+            raise Exception("You need to load data. Use '--help' for more information.")
+
         # Processing files
         for file in os.listdir(category_dir):
             filepath = os.path.join(category_dir, file)
@@ -51,3 +54,11 @@ def get_model(img_width, img_height, categories):
             )
 
     return model
+
+
+def predict(frame, model):
+
+    image = np.array(frame)
+    prediction = model.predict(image)
+    print(prediction)
+
