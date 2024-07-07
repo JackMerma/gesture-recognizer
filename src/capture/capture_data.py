@@ -1,5 +1,6 @@
 import cv2
 import os
+import shutil
 from config import *
 
 
@@ -14,15 +15,31 @@ def show_frame(frame):
 def is_pressing_killing_key():
     return cv2.waitKey(1) & 0xFF == ord('q')
 
+
 def save_frame(frame, file_path):
     cv2.imwrite(file_path, frame)
+
+
+def check(path):
+
+    # Deleting all path data
+    if os.path.exists(path):
+        try:
+            shutil.rmtree(path)
+        except Exception as e:
+            print(f"Can't delete {path} directory")
+
+    # Creating if does not exist
+    os.makedirs(path, exist_ok=True)
 
 
 def capture(data_class):
 
     # Getting path
     path = PATH_CLASS[data_class]
-    print("path: ", path)
+
+    # Assert that path exist
+    check(path)
 
     # Capturing data using the camera
     cap = cv2.VideoCapture(0)
