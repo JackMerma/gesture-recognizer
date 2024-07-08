@@ -52,8 +52,8 @@ def get_model(shape, categories):
 
         Flatten(),
         Dense(512, activation="relu"),
-        Dropout(0.2),
-        Dense(len(categories), activation="softmax")
+        Dropout(0.5),
+        Dense(2, activation="sigmoid")
         ])
 
 

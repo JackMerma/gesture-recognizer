@@ -84,7 +84,7 @@ def capture(data_class):
 
 def play(model_name):
 
-    model_name = f"{MODEL_NAME}.{MODEL_EXTENSION}" if model_name != None else f"{model_name}.{MODEL_EXTENSION}"
+    model_name = f"{MODEL_NAME}.{MODEL_EXTENSION}" if model_name == None else f"{model_name}.{MODEL_EXTENSION}"
 
     # Reading keras model
     model = tf.keras.models.load_model(os.path.join(MODEL_FOLDER, model_name))
