@@ -3,6 +3,7 @@ import sys
 import os
 import tensorflow as tf
 import numpy as np
+from config import *
 
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
@@ -74,12 +75,29 @@ def get_prediction(prediction):
     return 1, prediction[1]
 
 
-def predict(frame, model):
+def put_label(label, percent, frame):
 
-    image = np.expand_dims(frame, axis=(0, -1))
+    font = cv2.FONT_HERSHEY_DUPLEX
+    font_scale = 2
+    font_thickness = 3
+    font_color = (229, 232, 232)
+
+    # Getting text shape
+    (text_width, text_height), baseline = cv2.getTextSize(label, font, font_scale, font_thickness)
+
+    # Calculating position
+    x = (frame.shape[1] - text_width) // 2
+    y = frame.shape[0] - baseline
+
+    cv2.putText(frame, label, (x, y), font, font_scale, font_color, font_thickness, lineType=cv2.LINE_AA)
+
+
+def predict(base_frame, frame, model):
+
+    image = np.expand_dims(base_frame, axis=(0, -1))
     prediction = model.predict(image)
     
-    class_prediction, acc = get_prediction(prediction[0])
-    print(class_prediction)
-    print(prediction)
+    class_prediction, percent = get_prediction(prediction[0])
 
+    # Adding prediction info into frame
+    put_label(CATEGORIES[class_prediction], percent, frame)
