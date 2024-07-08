@@ -105,7 +105,6 @@ def play(model_name):
         # Predict frame classification using the model
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray_frame = cv2.resize(gray_frame, (IMAGE_WIDTH, IMAGE_HEIGTH))
-        #frame = np.array(frame)
         predict(gray_frame, model)
 
         # Showing the frame

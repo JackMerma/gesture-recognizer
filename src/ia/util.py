@@ -33,18 +33,27 @@ def load_data(path, categories, img_width, img_height):
 def get_model(shape, categories):
 
     model = Sequential([
-        Conv2D(
-            32, (2, 2), activation="relu", input_shape=shape
-            ),
-        MaxPooling2D(pool_size=(2, 2)),
-        Conv2D(64, (2, 2), activation="relu"),
-        MaxPooling2D(pool_size=(3, 3)),
-        Conv2D(128, (2, 2), activation="relu"),
-        MaxPooling2D(pool_size=(3, 3)),
+        Conv2D(16, (3, 3), activation="relu", padding="same", input_shape=shape),
+        BatchNormalization(),
+
+        Conv2D(32, (3, 3), strides=(2, 2), padding="same", activation="relu"),
+        Dropout(0.2),
+        BatchNormalization(),
+
+        Conv2D(64, (3, 3), strides=(2, 2), padding="same", activation="relu"),
+        BatchNormalization(),
+
+        Conv2D(128, (3, 3), strides=(2, 2), padding="same", activation="relu"),
+        Dropout(0.2),
+        BatchNormalization(),
+
+        Conv2D(256, (3, 3), strides=(2, 2), padding="same", activation="relu"),
+        BatchNormalization(),
+
         Flatten(),
         Dense(512, activation="relu"),
         Dropout(0.2),
-        Dense(len(categories), activation="sigmoid")
+        Dense(len(categories), activation="softmax")
         ])
 
 
