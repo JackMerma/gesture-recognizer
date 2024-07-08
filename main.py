@@ -16,7 +16,7 @@ def main():
     elif args.train:
         train(args.name)
     elif args.play:
-        play(args.play)
+        play(args.name)
 
 
 
