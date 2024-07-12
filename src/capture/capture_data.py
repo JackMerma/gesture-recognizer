@@ -5,18 +5,12 @@ from config import *
 import tensorflow as tf
 from src.ia.util import predict
 import numpy as np
+from src.capture.game import *
+from src.capture.utils import *
 
-
-def get_frame(cap):
-    return cap.read()
-
-
-def show_frame(frame):
-    cv2.imshow("Camera feed", frame)
-
-
-def is_pressing_killing_key():
-    return cv2.waitKey(1) & 0xFF == ord('q')
+import sys
+sys.stdout = open(os.devnull, 'w')
+sys.stderr = open(os.devnull, 'w')
 
 
 def save_frame(frame, file_path):
@@ -95,6 +89,8 @@ def play(model_name):
     if not cap.isOpened():
         raise Exception("Can't open the camera")
 
+    play_game(cap, model)
+    """
     # Real time capture
     while True:
         ret, frame = get_frame(cap)
@@ -105,7 +101,10 @@ def play(model_name):
         # Predict frame classification using the model
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray_frame = cv2.resize(gray_frame, (IMAGE_WIDTH, IMAGE_HEIGTH))
-        predict(gray_frame, frame, model)
+        class_prediction, percent = predict(gray_frame, frame, model)
+
+        # Sending game action
+        apply_action(class_prediction, gameDisplay)
 
         # Showing the frame
         show_frame(frame)
@@ -113,6 +112,8 @@ def play(model_name):
         # Exit from the loop
         if is_pressing_killing_key():
             break
+    """
+
 
     cap.release()
     cv2.destroyAllWindows()
