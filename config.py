@@ -12,6 +12,8 @@ IMAGE_WIDTH = 100
 IMAGE_HEIGTH = 100
 TEST_SIZE = 0.4
 EPOCHS = 10
+RESOURCES_PATH = "assets/images/"
+GAME_FILE = "resources.png"
 
 
 def load_parser():
