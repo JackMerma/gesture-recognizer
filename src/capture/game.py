@@ -122,10 +122,12 @@ def play_game(cap, model):
             break
 
         # Play game
+        start = True
         gameDisplay.fill((255,255,255))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 crashed = True
+            """
             if event.type==pygame.KEYDOWN:
                 start = True
                 if event.key == pygame.K_DOWN:
@@ -133,10 +135,17 @@ def play_game(cap, model):
                     state = crouch
                 if event.key == pygame.K_UP:
                     if height >= 110:jumping = True
+            """
+            if class_prediction == 1:
+                slow_motion = True
+                state = crouch
+            if class_prediction == 0:
+                if height >= 110:jumping = True
             if event.type==pygame.KEYUP:
                 slow_motion = False
                 if event.key == pygame.K_DOWN:
                     state = running
+
         player = state if type(state) != cycle else next(state)
         gameDisplay.blit(pygame.image.fromstring(cloud.tobytes(), cloud.size, 'RGBA'), c1)
         gameDisplay.blit(pygame.image.fromstring(cloud.tobytes(), cloud.size, 'RGBA'), c2)
