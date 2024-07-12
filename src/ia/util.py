@@ -101,3 +101,5 @@ def predict(base_frame, frame, model):
 
     # Adding prediction info into frame
     put_label(CATEGORIES[class_prediction], percent, frame)
+
+    return class_prediction, percent
