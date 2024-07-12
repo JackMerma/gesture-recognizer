@@ -8,10 +8,6 @@ import numpy as np
 from src.capture.game import *
 from src.capture.utils import *
 
-import sys
-sys.stdout = open(os.devnull, 'w')
-sys.stderr = open(os.devnull, 'w')
-
 
 def save_frame(frame, file_path):
     cv2.imwrite(file_path, frame)
